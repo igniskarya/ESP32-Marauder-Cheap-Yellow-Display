@@ -6,18 +6,17 @@
 #include "configs.h"
 #include "settings.h"
 #include <Arduino.h>
-#include <Adafruit_NeoPixel.h>
+#ifdef HAS_NEOPIXEL_LED
+  #include <Adafruit_NeoPixel.h>
+#endif
 
 #define Pixels 1
 
-#define MODE_OFF 0
-#define MODE_RAINBOW 1
-#define MODE_ATTACK 2
-#define MODE_SNIFF 3
-#define MODE_CUSTOM 4
-
 extern Settings settings_obj;
-extern Adafruit_NeoPixel strip;
+
+#ifdef HAS_NEOPIXEL_LED
+  extern Adafruit_NeoPixel strip;
+#endif
 
 class LedInterface {
 
@@ -35,7 +34,8 @@ class LedInterface {
     void rainbow();
     void ledOff();
     void attackLed();
-    void sniffLed();  
+    void sniffLed();
+  
   public:
     LedInterface();
 
